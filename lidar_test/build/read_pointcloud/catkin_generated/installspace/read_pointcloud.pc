@@ -1,0 +1,8 @@
+prefix=/home/jeff/rosprt/lidar_test/install
+
+Name: read_pointcloud
+Description: Description of read_pointcloud
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/jeff/rosprt/lidar_test/install/lib 
+Requires: 

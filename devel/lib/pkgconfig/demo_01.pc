@@ -1,0 +1,8 @@
+prefix=/home/jeff/rosprt/devel
+
+Name: demo_01
+Description: Description of demo_01
+Version: 0.0.0
+Cflags: -I/home/jeff/rosprt/devel/include
+Libs: -L/home/jeff/rosprt/devel/lib 
+Requires: roscpp std_msgs message_runtime

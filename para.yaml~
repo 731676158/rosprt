@@ -1,0 +1,13 @@
+background_b: 255
+background_g: 86
+background_r: 69
+rosdistro: 'indigo
+
+  '
+roslaunch:
+  uris: {host_localhost__40079: 'http://localhost:40079/'}
+rosversion: '1.11.21
+
+  '
+run_id: 16d83db0-b00c-11ec-97c3-8cec4b710107
+turtlesim: {}

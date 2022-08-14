@@ -1,0 +1,25 @@
+background_b: 0
+background_g: 0
+background_r: 0
+hello:
+  background_b: 255
+  background_g: 86
+  background_r: 69
+  turtle1: {param_B: inside}
+param_A: 100
+radius: 0.5
+radius_param: 0.4
+rosdistro: 'indigo
+
+  '
+roslaunch:
+  uris: {host_localhost__32956: 'http://localhost:32956/', host_localhost__34502: 'http://localhost:34502/',
+    host_localhost__37116: 'http://localhost:37116/', host_localhost__37129: 'http://localhost:37129/',
+    host_localhost__38426: 'http://localhost:38426/', host_localhost__39182: 'http://localhost:39182/',
+    host_localhost__42615: 'http://localhost:42615/', host_localhost__46020: 'http://localhost:46020/'}
+rosversion: '1.11.21
+
+  '
+run_id: 4f146080-b022-11ec-8ec6-8cec4b710107
+type: xiaohuang
+type_param: xiaobai

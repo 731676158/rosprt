@@ -1,0 +1,17 @@
+<launch>
+
+<!--启动乌龟GUI节点-->
+<node pkg="turtlesim" type="turtlesim_node" name="turtle1" output="screen"/>
+<node pkg="turtlesim" type="turtle_teleop_key" name="key" output="screen"/>
+
+<!--生成新的乌龟-->
+<node pkg="tf04_test" type="test01_new_turtle" name="turtle2" output="screen"/>
+
+<!--启动两个乌龟相对与世界的坐标关系的发布-->
+<node pkg="tf04_test" type="test02_pub" name="pub1" args="turtl1" output="screen"/>
+<node pkg="tf04_test" type="test02_pub" name="pub2" args="turtl2" output="screen"/>
+
+<!--订阅两只乌龟的坐标变换与速度发布-->
+<node pkg="tf04_test" type="test03_sub" name="sub_turtle" output="screen"/>
+
+</launch>

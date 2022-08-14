@@ -1,0 +1,75 @@
+#include "ros/ros.h"
+#include "sensor_msgs/PointCloud2.h"
+#include "sensor_msgs/PointCloud.h"
+#include <pcl/point_types.h>
+#include <pcl/point_cloud.h>
+#include "pcl_ros/io/pcd_io.h"
+#include "std_msgs/String.h"
+#include <vector>
+
+#define PTSBFSZ 30  //30帧点云的拼接
+
+typedef pcl::PointCloud<pcl::PointXYZ> PointType;
+std::vector<PointType> points_frames;
+std::vector<std::vector<PointType>> points_vec;
+
+class points_read
+{
+public:
+  points_read(std::string s,int bufsz)
+  {
+    sub=nh.subscribe(s,bufsz,&points_read::gainPoints,this);
+  }
+  void parseData()
+  {
+    ros::spinOnce();
+  }
+  void gainPoints(const sensor_msgs::PointCloud2::ConstPtr& pts)
+  {
+    ROS_INFO("订阅的点云信息：frame:%s,size:(height:%d,width:%d),fields:%d,data:%d",
+	pts->header.frame_id.c_str(),pts->height,pts->width,
+	pts->fields.size(),pts->data.size()) ;
+    pcl::fromROSMsg(*pts, points);
+    if (points_frames.size()<PTSBFSZ)
+    {
+      points_frames.push_back(points);
+    }
+    else
+    {
+      points_vec.push_back(points_frames);
+      points_frames.clear();
+    }
+  }
+
+  ros::NodeHandle nh;
+  ros::Subscriber sub;
+
+  PointType points;
+  
+};
+
+
+int main(int argc,char* argv[])
+{
+  setlocale(LC_ALL,"");
+  ros::init(argc,argv,"sub_points");
+
+  points_read pr("/kitti/velo/pointcloud",100);  
+  
+  while(ros::ok())
+  {
+    pr.parseData();
+  }
+
+  for(int i=0;i<points_vec.size();++i)
+  {
+    PointType pts;
+    for(int j=0;j<points_vec[i].size();++j)
+    {
+      pts += points_vec[i][j];
+    }
+    pcl::io::savePCDFileASCII ("/home/jeff/rosprt/lidar_test/src/read_pointcloud/pcds/"+std::to_string(i)+".pcd", pts);
+  }
+
+  return 0;
+}

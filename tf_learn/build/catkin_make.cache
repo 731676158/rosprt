@@ -1,0 +1,2 @@
+tf01_static:tf02_dynamic:tf03_tfs:tf04_test
+-DCATKIN_DEVEL_PREFIX=/home/jeff/rosprt/tf_learn/devel -DCMAKE_INSTALL_PREFIX=/home/jeff/rosprt/tf_learn/install -G Unix Makefiles
